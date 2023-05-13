@@ -8,8 +8,13 @@ const SearchFeed = () => {
   const {searchTerm}= useParams();
 
   useEffect(()=>{
-    fetchFromAPI(`search?part=snippet&q=${searchTerm}`)
-    .then((data)=>setVideos(data.items))
+    const fetchData = async () => {
+      const response = await fetchFromAPI(`search?part=snippet&q=${searchTerm}`)
+      setVideos(response.items)
+    }
+    fetchData()
+    // fetchFromAPI(`search?part=snippet&q=${searchTerm}`)
+    // .then((data)=>setVideos(data.items))
   },[searchTerm])
 
   return (
